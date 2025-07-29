@@ -1,35 +1,34 @@
-let pack=document.getElementById("booster");
-   
+let pack = document.getElementById("booster");
 
+function randomNumber(min, max) {
+  return Math.ceil(Math.random() * (max - min) + min);
+}
 
-function randomNumber(min,max){
-    
+function openPack() {
+  let cardsOpened = document.getElementById("booster2");
 
-    return Math.ceil(Math.random()*(max-min)+min);}
+  //clear previous cards
+  while (cardsOpened.firstChild) {
+    cardsOpened.firstChild.remove();
+  }
+  //generate 3 cards
+  for (let i = 0; i < 3; i++) {
+    let cardDiv = document.createElement("div");
+    let cardImg = document.createElement("img");
+    cardImg.id = `card-${i}`;
 
-function openPack(){
+    let num = randomNumber(1, 67);
+    if (i == 2) {
+      num = randomNumber(50, 67);
+    }
 
-let cardsOpened=document.getElementById("booster2");
-while(cardsOpened.firstChild){cardsOpened.firstChild.remove()};
+    cardImg.src = "kartt/" + num.toString() + ".jpg";
 
-    for(let i=0;i<3;i++)
-    {let cardDiv=document.createElement("div");
-        cardDiv.classList.add("mops-card");
-        let cardImg=document.createElement("img");
-        cardImg.id=i;
-
-        let num=1;
-        if(i==3)
-        {num= randomNumber(30, 67)}
-        else{num=randomNumber(1,67)};
-
-        cardImg.src="\kartt/"+num.toString()+".jpg";
+    // draggable card not working for now
 
     cardDiv.appendChild(cardImg);
     document.querySelector("#booster2").appendChild(cardDiv);
-    }
+  }
 }
 
-
-
- pack.addEventListener("click",openPack);
+pack.addEventListener("click", openPack);
